@@ -1,0 +1,156 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block content %}
+
+<div class="mb-4">
+
+    <h2 class="fw-bold">
+
+        Clima
+
+    </h2>
+
+    <p class="text-muted">
+
+        Consulta el estado del clima
+
+    </p>
+
+</div>
+
+<div
+    class="card border-0 shadow-sm rounded-4">
+
+    <div
+        class="card-body p-5">
+
+        <form
+            method="GET"
+            class="mb-4">
+
+            <div class="row">
+
+                <div class="col-md-10">
+
+                    <input
+                        type="text"
+                        name="city"
+                        class="form-control custom-input"
+                        placeholder="Ej: Bogotá">
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button
+                        class="btn btn-primary w-100 h-100 rounded-4">
+
+                        Buscar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        {% if weather %}
+
+        <div
+            class="text-center">
+
+            <img
+                src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+
+            <h2>
+
+                {{ weather.city }}
+
+            </h2>
+
+            <h1
+                class="fw-bold">
+
+                {{ weather.temp }}°C
+
+            </h1>
+
+            <p
+                class="text-muted text-capitalize">
+
+                {{ weather.description }}
+
+            </p>
+
+            <div class="row mt-4">
+
+                <div class="col-md-6">
+
+                    <div
+                        class="card rounded-4 border-0 bg-light p-4">
+
+                        <h5>
+
+                            Humedad
+
+                        </h5>
+
+                        <h3>
+
+                            {{ weather.humidity }}%
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div
+                        class="card rounded-4 border-0 bg-light p-4">
+
+                        <h5>
+
+                            Viento
+
+                        </h5>
+
+                        <h3>
+
+                            {{ weather.wind }} km/h
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<style>
+
+.custom-input{
+
+    border:
+    1px solid #dbe2ea !important;
+
+    border-radius:
+    14px !important;
+
+    min-height:
+    52px;
+}
+
+</style>
+
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block content %}
+
+<div
+    class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2 class="fw-bold">
+
+            Usuarios
+
+        </h2>
+
+        <p class="text-muted">
+
+            Gestiona usuarios del sistema
+
+        </p>
+
+    </div>
+
+</div>
+
+<div
+    class="card border-0 shadow-sm rounded-4">
+
+    <div
+        class="card-body p-4">
+
+        <table
+            class="table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Último acceso</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for user in users %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+
+                            {{ user.name }}
+
+                        </strong>
+
+                    </td>
+
+                    <td>
+
+                        {{ user.email }}
+
+                    </td>
+
+                    <td>
+
+                        {% if user.role == 'admin' %}
+
+                        <span
+                            class="badge bg-primary rounded-pill">
+
+                            Admin
+
+                        </span>
+
+                        {% else %}
+
+                        <span
+                            class="badge bg-secondary rounded-pill">
+
+                            Usuario
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ user.last_login }}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'edit_user' user.uid %}"
+                            class="btn btn-warning btn-sm rounded-3">
+
+                            Editar
+
+                        </a>
+
+                        <a
+                            href="{% url 'delete_user' user.uid %}"
+                            class="btn btn-danger btn-sm rounded-3">
+
+                            Eliminar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td
+                        colspan="5"
+                        class="text-center">
+
+                        No hay usuarios
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

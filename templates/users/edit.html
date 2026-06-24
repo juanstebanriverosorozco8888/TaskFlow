@@ -1,0 +1,113 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block content %}
+
+<div
+    class="card border-0 shadow-sm rounded-4 p-5">
+
+    <h2 class="fw-bold mb-4">
+
+        Editar Usuario
+
+    </h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="mb-4">
+
+            <label
+                class="form-label fw-semibold">
+
+                Nombre
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control custom-input"
+                value="{{ user.name }}"
+                disabled>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label
+                class="form-label fw-semibold">
+
+                Email
+
+            </label>
+
+            <input
+                type="text"
+                class="form-control custom-input"
+                value="{{ user.email }}"
+                disabled>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label
+                class="form-label fw-semibold">
+
+                Rol
+
+            </label>
+
+            <select
+                name="role"
+                class="form-select custom-input">
+
+                <option
+                    value="usuario">
+
+                    Usuario
+
+                </option>
+
+                <option
+                    value="admin">
+
+                    Administrador
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="btn btn-primary rounded-4 px-4">
+
+            Guardar cambios
+
+        </button>
+
+    </form>
+
+</div>
+
+<style>
+
+.custom-input{
+
+    border:
+    1px solid #dbe2ea !important;
+
+    border-radius:
+    14px !important;
+
+    min-height:
+    52px;
+
+    padding:
+    12px 18px;
+}
+
+</style>
+
+{% endblock %}

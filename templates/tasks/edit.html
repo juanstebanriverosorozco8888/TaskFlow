@@ -1,0 +1,81 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block content %}
+
+<div class="card border-0 shadow-sm rounded-4 p-4">
+
+    <h2 class="mb-4">
+
+        Editar tarea
+
+    </h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="text"
+            name="title"
+            value="{{ task.title }}"
+            class="form-control mb-3">
+
+        <textarea
+            name="description"
+            class="form-control mb-3">{{ task.description }}</textarea>
+
+        <select
+            name="assigned_to"
+            class="form-select mb-3">
+
+            {% for user in users %}
+
+            <option
+                value="{{ user.uid }}">
+
+                {{ user.name }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+        <select
+            name="priority"
+            class="form-select mb-3">
+
+            <option>Alta</option>
+            <option>Media</option>
+            <option>Baja</option>
+
+        </select>
+
+        <select
+            name="status"
+            class="form-select mb-3">
+
+            <option>Pendiente</option>
+            <option>En progreso</option>
+            <option>Completada</option>
+
+        </select>
+
+        <input
+            type="date"
+            name="deadline"
+            value="{{ task.deadline }}"
+            class="form-control mb-4">
+
+        <button
+            class="btn btn-success">
+
+            Guardar cambios
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

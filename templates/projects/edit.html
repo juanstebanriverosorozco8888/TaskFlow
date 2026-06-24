@@ -1,0 +1,104 @@
+{% extends 'layouts/admin_base.html' %}
+
+{% block content %}
+
+<div
+    class="card border-0 shadow-sm rounded-4 p-4">
+
+    <h2 class="mb-4">
+
+        Editar Proyecto
+
+    </h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="mb-3">
+
+            <label>
+
+                Nombre
+
+            </label>
+
+            <input
+                type="text"
+                name="title"
+                value="{{ project.title }}"
+                class="form-control"
+                required>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label>
+
+                Descripción
+
+            </label>
+
+            <textarea
+                name="description"
+                class="form-control"
+                rows="4">{{ project.description }}</textarea>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label>
+
+                Estado
+
+            </label>
+
+            <select
+                name="status"
+                class="form-select">
+
+                <option
+                    {% if project.status == 'Activo' %}
+                    selected
+                    {% endif %}>
+
+                    Activo
+
+                </option>
+
+                <option
+                    {% if project.status == 'En pausa' %}
+                    selected
+                    {% endif %}>
+
+                    En pausa
+
+                </option>
+
+                <option
+                    {% if project.status == 'Finalizado' %}
+                    selected
+                    {% endif %}>
+
+                    Finalizado
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <button
+            class="btn btn-primary">
+
+            Guardar cambios
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

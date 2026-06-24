@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-wrapper">
+
+    <div class="auth-card">
+
+        <div class="text-center mb-4">
+
+            <h1 class="logo-title">
+
+                TaskFlow
+
+            </h1>
+
+            <p class="subtitle">
+
+                Inicia sesión para continuar
+
+            </p>
+
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+
+                <label class="mb-2">
+
+                    Correo electrónico
+
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="ejemplo@email.com"
+                    required>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="mb-2">
+
+                    Contraseña
+
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="********"
+                    required>
+
+            </div>
+
+            <button
+                class="btn btn-primary-custom w-100">
+
+                Ingresar
+
+            </button>
+
+        </form>
+
+             <div class="text-center mt-4">
+
+                <span>
+                    ¿No tienes cuenta?
+                </span>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="auth-link">
+
+                    Crear cuenta
+
+                </a>
+
+            </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

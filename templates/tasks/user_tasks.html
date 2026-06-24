@@ -1,0 +1,259 @@
+{% extends 'layouts/user_base.html' %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2
+            class="fw-bold mb-1"
+            style="color:#1f2937;">
+
+            Mis Tareas
+
+        </h2>
+
+        <p
+            class="text-muted mb-0">
+
+            Gestión y seguimiento de tus tareas asignadas
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    {% for task in tasks %}
+
+    <div class="col-lg-6 mb-4">
+
+        <div
+            class="card border-0 shadow-sm rounded-4 h-100">
+
+            <div class="card-body p-4">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h5
+                        class="fw-bold"
+                        style="color:#1f2937;">
+
+                        {{ task.title }}
+
+                    </h5>
+
+                    {% if task.priority == 'Alta' %}
+
+                        <span
+                            class="badge bg-danger">
+
+                            Alta
+
+                        </span>
+
+                    {% elif task.priority == 'Media' %}
+
+                        <span
+                            class="badge bg-warning text-dark">
+
+                            Media
+
+                        </span>
+
+                    {% else %}
+
+                        <span
+                            class="badge bg-success">
+
+                            Baja
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+                <hr>
+
+                <p
+                    class="text-muted">
+
+                    {{ task.description }}
+
+                </p>
+
+                <div class="mb-2">
+
+                    <strong>
+
+                        Proyecto:
+
+                    </strong>
+
+                    {{ task.project_name }}
+
+                </div>
+
+                <div class="mb-2">
+
+                    <strong>
+
+                        Fecha límite:
+
+                    </strong>
+
+                    {{ task.deadline }}
+
+                </div>
+
+                <div class="mb-3">
+
+                    <strong>
+
+                        Estado actual:
+
+                    </strong>
+
+                    {% if task.status == 'Pendiente' %}
+
+                        <span
+                            class="badge bg-secondary">
+
+                            Pendiente
+
+                        </span>
+
+                    {% elif task.status == 'En progreso' %}
+
+                        <span
+                            class="badge bg-primary">
+
+                            En progreso
+
+                        </span>
+
+                    {% else %}
+
+                        <span
+                            class="badge bg-success">
+
+                            Completada
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+                <form
+                    method="POST"
+                    action="{% url 'user_update_status' task.id %}">
+
+                    {% csrf_token %}
+
+                    <div class="row">
+
+                        <div class="col-md-8">
+
+                            <select
+                                name="status"
+                                class="form-select">
+
+                                <option
+                                    value="Pendiente"
+                                    {% if task.status == 'Pendiente' %}
+                                    selected
+                                    {% endif %}>
+
+                                    Pendiente
+
+                                </option>
+
+                                <option
+                                    value="En progreso"
+                                    {% if task.status == 'En progreso' %}
+                                    selected
+                                    {% endif %}>
+
+                                    En progreso
+
+                                </option>
+
+                                <option
+                                    value="Completada"
+                                    {% if task.status == 'Completada' %}
+                                    selected
+                                    {% endif %}>
+
+                                    Completada
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <button
+                                class="btn w-100 text-white"
+                                style="background:#2563eb;"
+                                {% if task.status == 'Completada' %}
+                                disabled
+                                {% endif %}>
+
+                                Guardar
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12">
+
+        <div
+            class="card border-0 shadow-sm rounded-4">
+
+            <div
+                class="card-body text-center p-5">
+
+                <h4
+                    class="fw-bold">
+
+                    No tienes tareas asignadas
+
+                </h4>
+
+                <p
+                    class="text-muted">
+
+                    Cuando un administrador te asigne tareas aparecerán aquí.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
